@@ -3,39 +3,31 @@ import "./App.css";
 import { IconClose } from "./components/icons/Close";
 import { IconSearch } from "./components/icons/Search";
 import { IconClock } from "./components/icons/Clock";
+import { SearchInput } from "./components/SearchInput";
+import { SearchClearButton } from "./components/SearchClearButton";
+import { SearchSubmitButton } from "./components/SearchSubmitButton";
 
 function App() {
   const [value, setValue] = React.useState<string>("");
 
-  function onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+  function onChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
     setValue(target.value);
+  }
+
+  function onClearClick() {
+    setValue("");
   }
 
   return (
     <div className="App">
       <div className="Search-container">
-        <input
-          type="text"
-          value={value}
-          onChange={onChange}
-          placeholder="Search"
-          className={`Search-input ${value !== "" ? "active" : ""}`}
-        />
+        <SearchInput value={value} onChange={onChange} />
 
-        {value !== "" && (
-          <button
-            type="button"
-            className="Search-clear"
-            onClick={() => setValue("")}
-          >
-            <IconClose />
-          </button>
-        )}
+        {value !== "" && <SearchClearButton onClick={onClearClick} />}
 
-        <button type="button" className="Search-button" disabled={value === ""}>
-          <IconSearch />
-        </button>
+        <SearchSubmitButton disabled={value === ""} />
       </div>
+
       {value !== "" && (
         <div className="Search-result">
           <button className="Search-result-item">
