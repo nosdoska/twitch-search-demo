@@ -4,18 +4,7 @@ import { SearchInput } from "./components/SearchInput";
 import { SearchClearButton } from "./components/SearchClearButton";
 import { SearchSubmitButton } from "./components/SearchSubmitButton";
 import { SearchResult } from "./components/SearchResult";
-
-function getExistentHistory(): string[] {
-  const history = window.localStorage.getItem("history");
-
-  if (history) {
-    const parsed = JSON.parse(history);
-
-    return parsed;
-  }
-
-  return [];
-}
+import { getExistentHistory } from "./utils";
 
 function App() {
   const searchWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -35,7 +24,7 @@ function App() {
     window.localStorage.setItem("history", JSON.stringify(history));
   }, [history]);
 
-  function onClickOutside(event: any) {
+  function onClickOutside(event: any): void {
     if (searchWrapperRef.current?.contains(event.target)) {
       return;
     }
@@ -57,8 +46,6 @@ function App() {
     if (value === "") return;
 
     if (history.indexOf(value) < 0) {
-      console.log("history.length, ", history.length);
-
       if (history.length > 4) {
         const copy = [...history];
 

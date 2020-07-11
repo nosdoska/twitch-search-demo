@@ -97,6 +97,7 @@
 }
 
 .Search-result-item {
+  text-decoration: none;
   width: 100%;
   height: 40px;
   text-align: left;
@@ -111,20 +112,23 @@
   justify-content: space-between;
 }
 
-.Search-result-item.highlight {
+.Search-result-item.highlight a {
   color: fuchsia;
 }
 
-.Search-result-item span {
+.Search-result-item a {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
 }
 
 .Search-result-item:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
 
-.Search-result-item span svg {
+.Search-result-item a svg {
   fill: currentColor;
   margin-left: 0.25rem;
   margin-right: 0.5rem;
@@ -136,10 +140,15 @@
   height: 30px;
   background: transparent;
   border: none;
-  color: rgb(239, 239, 241);
+  color: rgba(255, 255, 255, 0.75);
   border-radius: 3px;
 }
 
 .Search-result-clear:hover {
   background-color: rgba(255, 255, 255, 0.15);
+}
+
+.Search-result-clear svg {
+  width: 12px;
+  height: 12px;
 }

@@ -1,43 +1,13 @@
 import * as React from "react";
 import { IconSearch } from "./icons/Search";
 import { IconClock } from "./icons/Clock";
-import { IconClose } from "./icons/Close";
+import { Item } from "./SearchResultItem";
+import { ItemClearButton } from "./SearchResultItemClearButton";
+import { ItemContainer } from "./SearchResultItemContainer";
 
-type Children = {
+export type Children = {
   children: React.ReactNode;
 };
-
-type ItemContainerProps = Children & {
-  highlighted?: boolean;
-};
-
-function ItemContainer({ highlighted, children }: ItemContainerProps) {
-  return (
-    <button className={`Search-result-item ${highlighted ? "highlight" : ""}`}>
-      {children}
-    </button>
-  );
-}
-
-type ItemProps = Children;
-
-function Item({ children }: ItemProps) {
-  return <span>{children}</span>;
-}
-
-type ItemClearButtonProps = {
-  onClick: () => void;
-};
-
-function ItemClearButton({
-  onClick,
-}: ItemClearButtonProps): React.ReactElement {
-  return (
-    <button type="button" className="Search-result-clear" onClick={onClick}>
-      <IconClose />
-    </button>
-  );
-}
 
 type Props = {
   value: string;
@@ -68,7 +38,7 @@ function SearchResult({ value, history, onClear }: Props): React.ReactElement {
         history.length > 0 &&
         [...history].reverse().map((item) => (
           <ItemContainer key={item} highlighted>
-            <Item>
+            <Item href={`/search?q=${encodeURI(item)}`}>
               <IconClock /> {item}
             </Item>
             <ItemClearButton onClick={() => onClear(item)} />
