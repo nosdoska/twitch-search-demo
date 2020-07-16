@@ -5,6 +5,7 @@ import { SearchClearButton } from "./components/SearchClearButton";
 import { SearchSubmitButton } from "./components/SearchSubmitButton";
 import { SearchResult } from "./components/SearchResult";
 import { getExistentHistory } from "./utils";
+import Trie from "./helpers/trie";
 
 function App() {
   const searchWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -58,6 +59,7 @@ function App() {
     }
 
     setValue("");
+    Trie.clearWordList();
   }
 
   function onClearClick(): void {
